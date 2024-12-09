@@ -1,0 +1,197 @@
+        
+        
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #9190900c;
+            color: #333;
+        }
+        header {
+            background-color: #708090;
+            color: #EAEAEA;
+            padding: 20px;
+            text-align: center;
+        }
+        .indent {
+            text-indent: 50px;
+        }
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 2rem auto;
+            background: #70809060;
+            padding: 2rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        main {
+            padding: 20px;
+            max-width: 900px;
+            margin: auto;
+        }
+        .TableContents{
+            font-family:Georgia, 'Times New Roman', Times, serif;
+            text-align: left;
+            color:#333;
+            text-decoration: underline;
+        }
+       
+        h1 {
+            font-family:Georgia, 'Times New Roman', Times, serif;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        h2{
+            font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+            
+
+        h3 {
+            font-family:Georgia, 'Times New Roman', Times, serif;
+            text-align: center;
+            color: #000000;
+            
+        }
+
+        h4 {
+            font-size: 1rem;
+            font-style: italic;
+            padding-left: 0px;
+        }
+
+        hr {
+            border: 0; /* Removes the default border */
+            height: 2px; /* Adjusts the thickness */
+            background-color: #000000; /* Changes the color */
+            margin: 20px 0; /* Adds spacing above and below */
+          }
+
+        section {
+            margin-bottom: 40px;
+        }
+        iframe {
+            display: block;
+            margin: 20px auto;
+        }
+        .tableau-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem 0;
+            background-color: #333;
+            color: #fff;
+        }
+       
+        .linked-image{
+            max-width: 80%;
+            height: auto; 
+            border-radius: 5px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        nav {
+            background-color: #333;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #e8bb52;
+            color: black;
+        }
+
+        .film-series-img {
+            max-width: 70%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .film-series h3 {
+            font-size: 1.2em;
+            text-align: center;
+        }
+
+        /* Add styles for the dropdown menu */
+            nav ul li.dropdown {
+                position: relative; /* Ensures the dropdown content appears in relation to the parent */
+            }
+
+            nav ul li .dropbtn {
+                text-decoration: none;
+                color: white;
+                font-weight: bold;
+                padding: 10px 15px;
+                border-radius: 5px;
+                cursor: pointer;
+                background-color: #333;
+                display: inline-block;
+            }
+
+            nav ul li .dropbtn:hover {
+                background-color: #e8bb52;
+                color: black;
+            }
+
+            /* Style the dropdown content */
+            nav ul li .dropdown-content {
+                display: none; /* Hides the dropdown menu by default */
+                position: absolute; /* Positions it below the button */
+                background-color: #333;
+                min-width: 100px;
+                box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+                z-index: 1;
+                top: 27.5px;
+            }
+
+            nav ul li .dropdown-content a {
+                color: white;
+                
+                text-decoration: none;
+                display: block;
+                text-align: left;
+            }
+
+            nav ul li .dropdown-content a:hover {
+                background-color: #e8bb52;
+                color: black;
+            }
+
+            /* Show the dropdown when hovering over the dropdown button */
+            nav ul li:hover .dropdown-content {
+                display: block;
+            }
+
+            html {
+                scroll-behavior: smooth;
+            }

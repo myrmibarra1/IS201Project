@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popcorn & Pixels - Number Guessing Game</title>
+
+    <link href="../css/customstyles.css" rel="stylesheet">
+
+    <style>
+        
+        header {
+            background-color: #737090;
+            color: #EAEAEA;
+            padding: 20px;
+            text-align: center;
+            margin-right: 15px;
+        }
+        .title-school{
+            font-size: 40px;
+            color:#000;
+            font-weight: bold;
+            text-decoration: underline;
+
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 2rem auto;
+            text-align: center;
+            background: #84bef960;
+            padding: 2rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .game-container {
+            text-align: center;
+            border: 2px solid #333;
+            padding: 20px;
+            background-color: rgb(245, 251, 251);
+            border-radius: 10px;
+            margin-top: 20px; /* Add spacing below the header */
+        }
+
+        .input-box {
+            padding: 10px;
+            font-size: 16px;
+            width: 125px;
+        }
+
+        .button {
+            font-size: 18px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 200px;
+            border-radius: 5px;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        .gifContainer {
+            margin-top: 20px;
+        }
+        
+
+        nav {
+            background-color: #333;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+        }
+
+        nav ul li {
+            display: inline;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #e8bb52;
+            color: black;
+        }
+        main {
+            padding: 20px;
+            max-width: 900px;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<!--HEADER!!!!-->  
+<header>
+    <h1>Popcorn & Pixels: The Art of Movies and Gaming</h1>
+        <nav>
+            <ul>
+                <li>
+                    <a href="../index.html" target="_blank">Home</a>
+                </li>
+                <li>
+                    <a href="../index.html" target="_blank">About Me</a>
+                </li>
+                <li class="dropdown">
+                    <a href="scratch.html"style="dropbtn">Blog</a> <!-- Changed from a simple link to a dropdown button -->
+                    <div class="dropdown-content"> <!-- Added a div for dropdown content -->
+                        <a href= "scratch.html#12052024">12/5/2024</a> <!-- Placeholder link, change as needed -->
+                        <a href="scratch.html#12042024">12/4/2024</a> <!-- Placeholder link, change as needed -->
+                    </div>
+                </li>                
+                <li class="dropdown">
+                    <a href="aisnakegame.html"style="dropbtn">Games</a> <!-- Changed from a simple link to a dropdown button -->
+                    <div class="dropdown-content"> <!-- Added a div for dropdown content -->
+                        <a href= "aisnakegame.html">Snake Game</a> <!-- Placeholder link, change as needed -->
+                        <a href="ainumbergame.html">Number Guessing Game</a> <!-- Placeholder link, change as needed -->
+                    </div>
+                 </li>
+                 <li>
+                    <a href="https://www.linkedin.com/in/myriam-i-120688190/" target="_blank">Contact</a>
+                </li>
+            </ul>
+        </nav>
+</header>
+
+<body>
+
+    <!--CONTAINER-->
+    <div class="container">
+        <main>
+
+            <!--NUMBER GAME --- SECTION TITLE-->
+
+         
+
+            <div class="game-container">
+                <h1 class="title-school">Number Guessing Game</h1>
+                <h4>Can You Guess the Number in 5 Attempts?</h4>
+                <p>Guess a number between 1 and 100</p>
+                <input type="number" id="guessInput" class="input-box" min="1" max="100" placeholder="Enter number"/>
+                <button class="button" onclick="checkGuess()">Submit Guess</button>
+                <p id="message" class="message"></p>
+                <p id="attempts">Attempts: 0</p>
+                <div class="gifContainer" id="gifContainer"></div>
+            </div>
+
+            
+
+            <script>
+                const randomNumber = Math.floor(Math.random() * 100) + 1; // Generate random number between 1 and 100
+                let attempts = 0;
+
+                function checkGuess() {
+                    const guessInput = document.getElementById('guessInput');
+                    const message = document.getElementById('message');
+                    const attemptsElement = document.getElementById('attempts');
+                    let guess = parseInt(guessInput.value);
+
+                    if (isNaN(guess) || guess < 1 || guess > 100) {
+                        message.textContent = "Please enter a valid number between 1 and 100.";
+                        return;
+                    }
+
+                    attempts++;
+                    attemptsElement.textContent = `Attempts: ${attempts}`;
+
+                    if (guess === randomNumber) {
+                        message.textContent = `Congratulations! You guessed the number in ${attempts} attempts.`;
+                        message.style.color = "green";
+
+                        setTimeout(function() {
+                            const gif = document.createElement('img');
+                            gif.src = "https://media1.tenor.com/images/985bc5cfe28d4b7ccb8a9058efbb693a/tenor.gif?itemid=14097983";
+                            gif.alt = "Rickroll gif";
+                            gif.style.width = "300px"; // Optional: Adjust the gif size
+                            const gifContainer = document.getElementById('gifContainer'); // Make sure to reference the correct container
+                            gifContainer.innerHTML = ''; // Clear previous content (if any)
+                            gifContainer.appendChild(gif); // Add the GIF to the container
+                        }, 3000); // 3 seconds delay
+
+
+                    } else if (guess < randomNumber) {
+                        message.textContent = "Too low! Try again.";
+                        message.style.color = "red";
+                    } else {
+                        message.textContent = "Too high! Try again.";
+                        message.style.color = "red";
+                    }
+
+                    guessInput.value = ''; // Clear input after each guess
+                    guessInput.focus();
+                }
+            </script>
+
+        </main>
+    </div>
+</body>
+
+<footer>
+    <p>&copy; 2024 - Ibarra Incorporated</p>
+</footer>
+
+</html>

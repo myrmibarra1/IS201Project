@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popcorn & Pixels - Snake Game</title>
+
+    <link href="../css/customstyles.css" rel="stylesheet">
+
+
+    <style>
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 2rem auto;
+            text-align: center;
+            background: #c2f98460;
+            padding: 2rem;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }   
+
+         header {
+            background-color: #70907e;
+            color: #EAEAEA;
+            text-align: center;
+        }
+      
+        .title-school{
+            font-size: 40px;
+            color:#000;
+            font-weight: bold;
+            text-decoration: underline;
+    }
+        canvas {
+            border: 2px solid #000000;
+            margin-bottom: 20px;
+        }
+        #score {
+            font-size: 25px;
+            position: relative;
+            top: -10px;
+            text-align: left;
+        }
+        .buttons {
+            display: center;
+            gap: 10px;
+        }
+        .button {
+            padding: 10px 30px ;
+            background-color: #fff;
+            color: #000;
+            border: none;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #99fb81;
+        }
+    </style>
+</head>
+
+
+    
+</head>
+
+<!--HEADER!!!!-->  
+<header>
+    <h1>Popcorn & Pixels: The Art of Movies and Gaming</h1>
+        <nav>
+            <ul>
+                <li>
+                    <a href="../index.html" target="_blank">Home</a>
+                </li>
+                <li>
+                    <a href="../index.html" target="_blank">About Me</a>
+                </li>
+                <li class="dropdown">
+                    <a href="scratch.html"style="dropbtn">Blog</a> <!-- Changed from a simple link to a dropdown button -->
+                    <div class="dropdown-content"> <!-- Added a div for dropdown content -->
+                        <a href= "scratch.html#12052024">12/5/2024</a> <!-- Placeholder link, change as needed -->
+                        <a href="scratch.html#12042024">12/4/2024</a> <!-- Placeholder link, change as needed -->
+                    </div>
+                </li>                
+                <li class="dropdown">
+                    <a href="aisnakegame.html"style="dropbtn">Games</a> <!-- Changed from a simple link to a dropdown button -->
+                    <div class="dropdown-content"> <!-- Added a div for dropdown content -->
+                        <a href= "aisnakegame.html">Snake Game</a> <!-- Placeholder link, change as needed -->
+                        <a href="ainumbergame.html">Number Guessing Game</a> <!-- Placeholder link, change as needed -->
+                    </div>
+                 </li>
+                 <li>
+                    <a href="https://www.linkedin.com/in/myriam-i-120688190/" target="_blank">Contact</a>
+                </li>
+            </ul>
+        </nav>
+</header>
+
+
+
+<body>
+
+    <!--CONTAINER-->
+        <div class="container">
+            <main>
+
+        <!--SNAKE GAME --- SECTION TITLE-->
+            <h1 class="title-school">Snake: School Edition</h1>
+
+            <h4>The legendary Snake Master hit 50. Can you claim the title? </h4><br>
+
+            
+
+        <!--SNAKE GAME-->
+
+                <div id="score">Score: 0</div>
+                <canvas id="gameCanvas" width="400" height="400"></canvas>
+                <div class="buttons">
+                    <button class="button" onclick="setGameSpeed('easy')">Easy</button>
+                    <button class="button" onclick="setGameSpeed('medium')">Medium</button>
+                    <button class="button" onclick="setGameSpeed('hard')">Hard</button>
+                </div>
+
+
+
+                <script>
+                    const canvas = document.getElementById("gameCanvas");
+                    const ctx = canvas.getContext("2d");
+                    const scoreElement = document.getElementById("score");
+            
+                    // Size of each snake segment and food
+                        const boxSize = 20;  
+                        let score = 0; 
+
+                    // Starting position of the snake
+                        let snake = [
+                            { x: 200, y: 200 }, 
+                        ];
+
+                    // Starting position of the food
+                        let direction = { x: 0, y: 0 };
+                        let food = getRandomFoodPosition();
+
+                    // Game speed (interval)
+                    // Default speed for medium mode
+                        let gameSpeed = 100; 
+
+                    
+                    // Load the image for the snake
+                        const snakeImage = new Image();
+                        snakeImage.src = "https://static.vecteezy.com/system/resources/previews/009/385/497/original/little-kid-face-expression-clipart-design-illustration-free-png.png";
+
+                    // Load the food image
+                        const foodImage = new Image();
+                        foodImage.src = "https://www.freepngclipart.com/download/building/74392-building-school-cartoon-free-transparent-image-hq.png";
+
+                    // Draw the snake
+                        function drawSnake() {
+                            snake.forEach(segment => {
+                                ctx.drawImage(snakeImage, segment.x, segment.y, boxSize, boxSize);
+                            });
+                        }
+
+                    // Draw the food
+                        function drawFood() {
+                            ctx.drawImage(foodImage, food.x, food.y, boxSize, boxSize);
+                        }
+
+                    // Move the snake
+                        function moveSnake() {
+                            const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
+                            snake.unshift(head);
+
+                        // Check for food collision
+                                if (head.x === food.x && head.y === food.y) {
+                                    score++;
+                                    scoreElement.textContent = `Score: ${score}`;
+                                    food = getRandomFoodPosition();
+                                } else {
+                                    snake.pop(); // Remove the last segment if no food is eaten
+                                }
+                        }   
+
+                    // Get random food position
+                        function getRandomFoodPosition() {
+                            const maxX = canvas.width / boxSize;
+                            const maxY = canvas.height / boxSize;
+                            return {
+                                x: Math.floor(Math.random() * maxX) * boxSize,
+                                y: Math.floor(Math.random() * maxY) * boxSize,
+                            };
+                        }
+
+                    // Check for collisions
+                        function checkCollision() {
+                            const head = snake[0];
+
+                            // Check for wall collision
+                                if (head.x < 0 || head.y < 0 || head.x >= canvas.width || head.y >= canvas.height) {
+                                    return true;
+                                }
+
+                            // Check for self-collision
+                                for (let i = 1; i < snake.length; i++) {
+                                    if (snake[i].x === head.x && snake[i].y === head.y) {
+                                        return true;
+                                    }
+                                }
+
+                            return false;
+                        }
+
+                    // Game loop
+                        function gameLoop() {
+                            // Fill the canvas with white color
+                                ctx.fillStyle = "white";
+                                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                                
+
+                                drawSnake();
+                                drawFood();
+                                moveSnake();
+
+                                if (checkCollision()) {
+                                    alert(`Game Over! Final Score: ${score}`);
+                                    snake = [{ x: 200, y: 200 }];
+                                    direction = { x: 0, y: 0 };
+                                    score = 0;
+                                    scoreElement.textContent = `Score: ${score}`;
+                                    food = getRandomFoodPosition();
+                                }
+                        }
+
+                    document.addEventListener('keydown', (event) => {
+                        switch (event.key) {
+                            case "ArrowUp":
+                                if (direction.y === 0) direction = { x: 0, y: -boxSize };
+                                break;
+                            case "ArrowDown":
+                                if (direction.y === 0) direction = { x: 0, y: boxSize };
+                                break;
+                            case "ArrowLeft":
+                                if (direction.x === 0) direction = { x: -boxSize, y: 0 };
+                                break;
+                            case "ArrowRight":
+                                if (direction.x === 0) direction = { x: boxSize, y: 0 };
+                                break;
+                        }
+                    });
+
+                    function setGameSpeed(mode) {
+                        if (mode === 'easy') {
+                            gameSpeed = 200; // Slow speed for easy mode
+                        } else if (mode === 'medium') {
+                            gameSpeed = 100; // Default speed for medium mode
+                        } else if (mode === 'hard') {
+                            gameSpeed = 50; // Fast speed for hard mode
+                        }
+                        clearInterval(gameInterval);
+                        gameInterval = setInterval(gameLoop, gameSpeed);
+                    }
+
+                    let gameInterval = setInterval(gameLoop, gameSpeed); // Initial game loop
+
+                    document.addEventListener('keydown', (event) => {
+                // Prevent page scrolling with arrow keys
+                if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
+                    event.preventDefault(); // Block default scrolling behavior
+                }
+
+                // Snake movement logic
+                switch (event.key) {
+                    case 'ArrowUp':
+                        if (direction.y === 0) direction = { x: 0, y: -boxSize };
+                        break;
+                    case 'ArrowDown':
+                        if (direction.y === 0) direction = { x: 0, y: boxSize };
+                        break;
+                    case 'ArrowLeft':
+                        if (direction.x === 0) direction = { x: -boxSize, y: 0 };
+                        break;
+                    case 'ArrowRight':
+                        if (direction.x === 0) direction = { x: boxSize, y: 0 };
+                        break;
+                }
+            });
+
+
+                </script>
+            
+
+            </main>
+                    </div>
+            <footer>
+                <p>&copy; 2024 - Ibarra Incorporated</p>
+            </footer>
+
+
+            </body>
+
+
+            </html>
+
+        
